@@ -4,7 +4,7 @@ Specify your vector to define your map, then process it with =(render-applicatio
 
 *** Example form-structure
 #+BEGIN_SRC clojure
-(def test-form [:mytext {:type :text
+(defn test-form [] [:mytext {:type :text
                          :label "My text"}
                 :mytextarea {:type :textarea
                              :label "My textarea"}
@@ -44,7 +44,7 @@ Specify your vector to define your map, then process it with =(render-applicatio
 As the second arg to =render-application= you can specify your read and update functions, which will be called to get the value of a field and to update the value of a field. Each function will receive from Reformation =[:path :to :value]= and, for update, also =new-value=. The following example works if you are using a local atom; you can trivially adjust this function to work with re-frame. 
 
 #+BEGIN_SRC clojure
-(rfc/render-application test-form {:READ (partial get-in @my-atom)
+(rfc/render-application (test-form) {:READ (partial get-in @my-atom)
                                    :UPDATE (partial swap! my-atom update-in)})
 #+END_SRC
 
